@@ -1,20 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Link} from 'react-router';
+import SkillsList from './../../components/skillsList';
+import SkillsData from './../../data/skills';
 
 const App = React.createClass({
+    getInitialState: function() {
+        return {
+            skills: SkillsData
+        };
+    },
+
     render() {
         return (
             <div>
-                <h1>Skills</h1>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/skills">Skills</Link></li>
-                </ul>
-
-                skills page
-                
-                {this.props.children}
+                <SkillsList skills={this.state.skills} />
             </div>
         )
     }
