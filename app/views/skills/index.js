@@ -6,11 +6,13 @@ const App = React.createClass({
     render() {
         return (
             <div>
-                <h1>React App</h1>
+                <h1>Skills</h1>
                 <ul>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/skills">Skills</Link></li>
                 </ul>
+
+                skills page
                 
                 {this.props.children}
             </div>
