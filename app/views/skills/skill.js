@@ -8,7 +8,9 @@ import SkillsData from './../../data/skills';
 let Skill = React.createClass({
     getInitialState: function() {
         return {
-            skills: SkillsData
+            skills: SkillsData,
+            compareAgainst: '',
+            compareAgainstData: {}
         };
     },
 
@@ -18,14 +20,39 @@ let Skill = React.createClass({
         });
     },
 
+    compareSkill: function(e) {
+        let value = e.target.value;
+
+        this.setState({
+            compareAgainst: value,
+            compareAgainstData: _.findWhere(this.state.skills, {'name': value})
+        });
+
+
+    },
+
     render() {
         return (
             <div>
+                <select onChange={this.compareSkill}>
+                    <option value="">Compare with...</option>
+                    <option value="React">React</option>
+                    <option value="CSS3">CSS3</option>
+                </select>
                 <h2>{this.state.skill.name}</h2>
                 <h3>Demand</h3>
                 <img src={this.state.skill.demandChart} alt="" />
                 <h3>Day rates</h3>
                 <img src={this.state.skill.dayRateChart} alt="" />
+
+                <div>
+                     <h2>{this.state.compareAgainstData.name}</h2>
+                    <h3>Demand</h3>
+                    <img src={this.state.compareAgainstData.demandChart} alt="" />
+                    <h3>Day rates</h3>
+                    <img src={this.state.compareAgainstData.dayRateChart} alt="" />
+                </div>
+               
             </div>
         )
     }
