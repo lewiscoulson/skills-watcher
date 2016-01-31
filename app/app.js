@@ -1,15 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Router, Route, Link} from 'react-router';
-import App from './views/app';
-import Skills from './views/skills';
-import Skill from './views/skills/skill';
+import angular from 'angular';
+import skillsData from './data/skills'
 
-ReactDOM.render((
-    <Router>
-        <Route path="/" component={App}>
-        	<Route path="skills" component={Skills} />
-        	<Route path="/skill/:id" component={Skill} />
-        </Route>
-    </Router>
-), document.getElementById('app'));
+let skillsWatcher = angular.module('skillsWatcher', []);
+
+let skillsController = skillsWatcher.controller('skillsController', function skillsController($scope) {
+	$scope.skills = skillsData;
+	$scope.showSkill = function(skill) {
+		$scope.activeSkill = skill;
+		$scope.isActiveSkillSelected = true;
+	};
+
+	$scope.addSkill = function() {
+		skillsData.push({
+			name: $scope.newSkill,
+			demandChart: 'http://www.itjobswatch.co.uk/charts/contract-demand-trend.aspx?s=' + $scope.newSkill + '&l=london'
+		});
+	}
+});

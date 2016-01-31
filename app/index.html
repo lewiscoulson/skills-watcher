@@ -1,12 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="skillsWatcher">
     <head>
         <meta charset="utf-8">
         <title>React Boilerplate 2016</title>
     </head>
     <body>
-        <div id="app"></div>
+      <div ng-controller="skillsController">
+      	<ul>
+      		<li ng-repeat="skill in skills">
+      			<a href="" ng-click="showSkill(skill)">{{skill.name}}</a>
+      		</li>
+      	</ul>
 
-        <script src="app.js"></script>
+      	<div ng-show="isActiveSkillSelected">
+	      	<h2>{{activeSkill.name}}</h2>
+	      	<img ng-src="{{activeSkill.demandChart}}" />
+	      </div>
+
+	      <form>
+	      	<label for="newSkill">add skill</label>
+	      	<input type="text" ng-model="newSkill" />
+	      	<button ng-click="addSkill()">add</button>
+	      </form>
+      </div>
+      <script src="app.js"></script>
     </body>
 </html>
